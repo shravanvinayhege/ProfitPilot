@@ -35,7 +35,7 @@ def initialize_database() -> None:
     try:
         # Create tables if they don't exist (without dropping existing data)
         Base.metadata.create_all(bind=engine)
-    except SQLAlchemyError as exc:
+    except Exception as exc:
         # Keep API booting so non-DB endpoints still work while DB creds are fixed.
         logger.error("Database initialization failed: %s", exc)
 
