@@ -69,11 +69,7 @@ $ uvicorn app:app --reload
 ```
 Visit `http://localhost:8000/docs` for interactive API documentation.
 
-## Testing
-Basic test commands, assuming tests are added:
-```bash
-pytest
-```
+
 
 ## Deployment
 - Review and update `render.yaml` and `runtime.txt` for your deployment platform.
