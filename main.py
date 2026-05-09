@@ -1,5 +1,6 @@
 import datetime
 import calendar
+import os
 
 from fastapi import FastAPI, HTTPException
 import logging
@@ -32,6 +33,15 @@ app = FastAPI()
 
 @app.on_event("startup")
 def initialize_database() -> None:
+    missing_auth_vars = [
+        key for key in ("APP_USERNAME", "APP_PASSWORD") if not os.getenv(key)
+    ]
+    if missing_auth_vars:
+        raise RuntimeError(
+            "Missing required environment variables: "
+            + ", ".join(missing_auth_vars)
+        )
+
     try:
         # Create tables if they don't exist (without dropping existing data)
         Base.metadata.create_all(bind=engine)
