@@ -12,8 +12,14 @@ PASSWORD = os.getenv("APP_PASSWORD")
 
 
 def verify_credentials(credentials: HTTPBasicCredentials = Depends(security)) -> str:
-	is_username_valid = secrets.compare_digest(credentials.username, str(USERNAME))
-	is_password_valid = secrets.compare_digest(credentials.password, str(PASSWORD))
+	if USERNAME is None or PASSWORD is None:
+		raise HTTPException(
+			status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+			detail="Authentication credentials are not configured.",
+		)
+
+	is_username_valid = secrets.compare_digest(credentials.username, USERNAME)
+	is_password_valid = secrets.compare_digest(credentials.password, PASSWORD)
 
 	if not (is_username_valid and is_password_valid):
 		raise HTTPException(

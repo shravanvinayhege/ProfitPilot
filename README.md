@@ -81,6 +81,7 @@ Visit `http://localhost:8000/docs` for interactive API documentation.
    - `DATABASE_URL`
    - `APP_USERNAME`
    - `APP_PASSWORD`
+   - Note: `render.yaml` keeps these with `sync: false`, so set them directly on the service in Render.
 5. Set this optional environment variable if you want AI insights:
    - `OPEN_ROUTER_KEY` (or `OPENROUTER_API_KEY`)
 
