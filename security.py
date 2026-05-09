@@ -1,4 +1,5 @@
 import secrets
+import os
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
@@ -6,8 +7,8 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 security = HTTPBasic()
 
-USERNAME = "shravan"
-PASSWORD = "shravan123"
+USERNAME = os.getenv("APP_USERNAME", "shravan")
+PASSWORD = os.getenv("APP_PASSWORD", "shravan123")
 
 
 def verify_credentials(credentials: HTTPBasicCredentials = Depends(security)) -> str:

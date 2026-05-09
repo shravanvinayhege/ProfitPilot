@@ -71,9 +71,20 @@ Visit `http://localhost:8000/docs` for interactive API documentation.
 
 
 
-## Deployment
-- Review and update `render.yaml` and `runtime.txt` for your deployment platform.
-- Add health checks as needed based on hosting provider documentation.
+## Deployment (Render)
+1. Push this repository to GitHub.
+2. In Render, create a **Blueprint** service and select this repository.
+3. Render will read `render.yaml` and create the web service using:
+   - Build command: `pip install -r requirements.txt`
+   - Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+4. Set these required environment variables in Render:
+   - `DATABASE_URL`
+   - `APP_USERNAME`
+   - `APP_PASSWORD`
+5. Set this optional environment variable if you want AI insights:
+   - `OPEN_ROUTER_KEY` (or `OPENROUTER_API_KEY`)
+
+After deploy, verify the health endpoint at `/` and the API docs at `/docs`.
 
 ## Contributing
 1. Fork the repo
