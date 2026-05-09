@@ -84,7 +84,7 @@ Visit `http://localhost:8000/docs` for interactive API documentation.
 5. Set this optional environment variable if you want AI insights:
    - `OPEN_ROUTER_KEY` (or `OPENROUTER_API_KEY`)
 
-After deploy, verify the health endpoint at `/` and the API docs at `/docs`.
+After deploy, verify the health endpoint at `/healthz` and the API docs at `/docs`.
 
 ## Contributing
 1. Fork the repo

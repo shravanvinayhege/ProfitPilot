@@ -7,11 +7,17 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 security = HTTPBasic()
 
-USERNAME = os.getenv("APP_USERNAME", "shravan")
-PASSWORD = os.getenv("APP_PASSWORD", "shravan123")
+USERNAME = os.getenv("APP_USERNAME")
+PASSWORD = os.getenv("APP_PASSWORD")
 
 
 def verify_credentials(credentials: HTTPBasicCredentials = Depends(security)) -> str:
+	if not USERNAME or not PASSWORD:
+		raise HTTPException(
+			status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+			detail="APP_USERNAME and APP_PASSWORD must be configured.",
+		)
+
 	is_username_valid = secrets.compare_digest(credentials.username, USERNAME)
 	is_password_valid = secrets.compare_digest(credentials.password, PASSWORD)
 

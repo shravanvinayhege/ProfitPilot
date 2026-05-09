@@ -45,6 +45,11 @@ def read_root():
     return {"Hello": "World"}
 
 
+@app.get("/healthz")
+def health_check():
+    return {"status": "ok"}
+
+
 @app.get("/login")
 def login(username: str = Depends(verify_credentials)):
     return {"message": f"Login successful for {username}"}
